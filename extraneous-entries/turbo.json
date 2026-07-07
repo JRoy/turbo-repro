@@ -1,0 +1,28 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".oxlintrc.json", "packages/eslint-plugin-custom/**"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "lint": {
+      "dependsOn": ["transit"],
+      "inputs": [
+        "**/*.{ts,tsx,js,jsx,cjs,mjs,prisma}",
+        ".oxlintrc.json",
+        "package.json",
+        "tsconfig.json"
+      ]
+    },
+    "type": {
+      "dependsOn": ["transit"]
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}
